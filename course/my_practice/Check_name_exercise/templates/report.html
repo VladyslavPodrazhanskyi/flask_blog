@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block page %}{{ super() }} Report{% endblock %}
+{% block content %}
+    <div class="jumbotron">
+        <p>Let see how you performed!!!</p>
+        {% if end_num and lower_letter and upper_letter %}
+            <p>Your username passed the 3 requirements!</p>
+        {% else %}
+            <p>Oh no! Looks like you had issues with your username!</p>
+            <p>Here are the requirements you failed:</p>
+            <ul>
+                {% if not upper_letter %}
+                    <li>You did not use an uppercase character.</li>
+                {% elif not lower_letter %}
+                    <li>You did not use an lowercase character.</li>
+                {% endif %}
+
+                {% if not end_num %}
+                    <li>You did not end your username with a number.</li>
+                {% endif %}
+            </ul>
+        {% endif %}
+    </div>
+{% endblock %}
