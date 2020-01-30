@@ -15,8 +15,8 @@
     </p>
     <form method="POST">
         {{ form.hidden_tag() }}  {# this attribute inherited from FlaskForm object #}
-        {{ form.breed.label }} {{ form.breed() }}
-        {{ form.submit() }}
+        {{ form.breed_field.label }} {{ form.breed_field }}
+        {{ form.submit }}
     </form>
 </body>
 </html>

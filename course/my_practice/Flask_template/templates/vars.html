@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vars</title>
+</head>
+<body>
+<h1>See different varuables:</h1>
+<p>string: {{ name }} and slice: {{ name[-2:0:-2] }}</p>
+<p>list: {{ name_list }} and slice {{ name_list[::3] }}</p>
+<p>dictionary: {{ puppy_dict }}</p>
+<p>dictionary: {{ puppy_dict.items() }}</p>
+<p>dictionary: {{ puppy_dict.get('age', 0) + 4 }}</p>
+<p>{{ puppy_dict }}</p>
+<ul>
+    {% for el in int_list %}
+        {% if el % 2 == 0  %}
+        <li>{{ el }}</li>
+        {% endif %}
+    {% endfor %}
+</ul>
+</body>
+</html>
