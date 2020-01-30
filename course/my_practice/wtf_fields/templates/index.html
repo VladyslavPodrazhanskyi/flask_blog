@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+    <h1>Welcome to the Puppy survey!</h1>
+    <form method="post">
+        {{ form.hidden_tag() }} {# this is method!!! use () #}
+        {{ form.breed.label }}{{ form.breed() }}
+        <br>
+        {{ form.neutered.label }}{{ form.neutered }}
+        <br>
+        {{ form.food.label }}{{ form.food }}
+        <br>
+        {{ form.mood.label }}{{ form.mood }}
+        <br>
+        <p>Any other feedback?</p>
+        {{ form.feedback }}
+        <br>
+        {{ form.submit }}
+    </form>
+
+
+</body>
+</html>
