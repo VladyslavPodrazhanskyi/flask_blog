@@ -3,7 +3,7 @@ from base import db, Puppy
 # create all the models(tables) of the db
 db.create_all()
 
-# create row of the table Puppy:
+#create row of the table Puppy:
 
 sam = Puppy('Sammy', 5)
 frank = Puppy('Frank', 2)

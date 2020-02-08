@@ -2,7 +2,7 @@ import os  # let grab path and file names
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
-###########################################
+########################################
 basedir = os.path.abspath(os.path.dirname(__file__))
 # __file__ - name of current file (base.py)
 # os.path.dirname(__file__) - return dir name of base.py (flask_db)
