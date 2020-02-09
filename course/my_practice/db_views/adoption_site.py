@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from forms import AddForm, DelForm
+from forms import AddForm, DelForm, AddOwner
 
 app = Flask(__name__)
 
@@ -30,12 +30,30 @@ class Puppy(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
+    owner = db.relationship('Owner', backref='Puppy', uselist=False )
 
     def __init__(self, name):
         self.name = name
 
     def __repr__(self):
-        return f'Puppy name: {self.name}'
+        if self.owner:
+            return f'Puppy name is {self.name} and owner is {self.owner.name}'
+        return f'Puppy name is {self.name} and has no owner assigned yet'
+
+class Owner(db.Model):
+
+    __tablename__ = 'owners'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.Text)
+    puppy_id = db.Column(db.Integer, db.ForeignKey('puppies.id'))
+
+    def __init__(self, name, puppy_id):
+        self.name = name
+        self.puppy_id = puppy_id
+
+    def __repr__(self):
+        return f'Owner name: {self.name}'
 
 ################################################
 ############  VIEW FUNCTIONS - Having FORMS ############
@@ -65,7 +83,6 @@ def add_pup():
 def list_pup():
 
     puppies = Puppy.query.all()
-    print(property)
     return render_template('list.html', puppies=puppies)
 
 
@@ -87,6 +104,36 @@ def del_pup():
             return render_template('delete.html', form=form, not_id_mess=not_id_mess)
 
     return render_template('delete.html', form=form, not_id_mess=not_id_mess)
+
+
+@app.route('/add_owner', methods=['GET', 'POST'])
+def add_owner():
+    form = AddOwner()
+    not_id_mess = ''
+    if form.validate_on_submit():
+        name = form.name.data
+        puppy_id = form.puppy_id.data
+
+        cur_pup = Puppy.query.get(puppy_id)
+
+        if cur_pup:
+
+            cur_owner = Owner(name, puppy_id)
+            cur_pup.owner = cur_owner
+
+            db.session.add_all([cur_owner, cur_pup])
+            db.session.commit()
+
+            puppies = Puppy.query.all()
+
+            return render_template('list.html', puppies=puppies)
+
+        else:
+            not_id_mess = f'Sorry, but we do not have the puppy with id: {puppy_id} '
+            return render_template('add_owner.html', form=form, not_id_mess=not_id_mess)
+
+    return render_template('add_owner.html', form=form, not_id_mess=not_id_mess)
+
 
 
 if __name__ == '__main__':
