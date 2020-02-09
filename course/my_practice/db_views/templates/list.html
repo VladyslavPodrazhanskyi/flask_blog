@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}list{% endblock %}
+{% block content %}
+    <h1>Here is a list of all available puppies:</h1>
 
-</body>
-</html>
+    <ul>
+        {% for puppy in puppies %}
+            <li>{{ puppy }}</li>
+        {% endfor %}
+    </ul>
+
+
+
+
+{% endblock %}

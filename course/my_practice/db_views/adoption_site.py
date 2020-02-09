@@ -35,7 +35,7 @@ class Puppy(db.Model):
         self.name = name
 
     def __repr__(self):
-        return f'Puppy name is {self.name}'
+        return f'Puppy name: {self.name}'
 
 ################################################
 ############  VIEW FUNCTIONS - Having FORMS ############
@@ -58,13 +58,14 @@ def add_pup():
 
         return redirect(url_for('list_pup'))
 
-    return render template('add.html', form=form)
+    return render_template('add.html', form=form)
 
 
 @app.route('/list')
 def list_pup():
 
     puppies = Puppy.query.all()
+    print(property)
     return render_template('list.html', puppies=puppies)
 
 
@@ -72,15 +73,20 @@ def list_pup():
 def del_pup():
 
     form = DelForm()
+    not_id_mess = ''
     if form.validate_on_submit():
         id = form.id.data
 
         pup_for_del = Puppy.query.get(id)
-        db.session.delete(pup_for_del)
-        db.session.commit()
+        if pup_for_del:
+            db.session.delete(pup_for_del)
+            db.session.commit()
+            return redirect(url_for('list_pup'))
+        else:
+            not_id_mess = f'Sorry, but we do not have the puppy with id: {id} '
+            return render_template('delete.html', form=form, not_id_mess=not_id_mess)
 
-        return redirect(url_for('list_pup'))
-    return render('delete.html', form=form)
+    return render_template('delete.html', form=form, not_id_mess=not_id_mess)
 
 
 if __name__ == '__main__':

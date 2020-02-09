@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}Delete{% endblock %}
+{% block content %}
+    <h1>Did a puppy get adopted?</h1>
+    <p>If so: Please fill out its id to remove from the database</p>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.id.label }}{{ form.id() }}
+        {{ form.submit() }}
+    </form>
+    <h1>{{ not_id_mess }}</h1>
+{% endblock %}
