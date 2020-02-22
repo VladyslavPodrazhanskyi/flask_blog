@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Delete{% endblock %}
+{% block content %}
+    <h1>Did a puppy get adopted?</h1>
+    <p>If so: Please fill out its id to remove from the database</p>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.id.label }}{{ form.id() }}
+        {{ form.submit() }}
+    </form>
+    <p></p>
+    <p>{{ not_id_mess }}</p>
+{% endblock %}
