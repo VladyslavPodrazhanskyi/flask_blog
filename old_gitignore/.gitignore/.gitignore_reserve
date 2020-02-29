@@ -110,6 +110,7 @@ celerybeat-schedule
 env/
 venv/
 ENV/
+venv
 
 # python files
 .pyc
