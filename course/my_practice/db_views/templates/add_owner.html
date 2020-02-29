@@ -3,6 +3,7 @@
 {% block content %}
     <h1>Add an owner</h1>
     <p>Add a new owner with the form below:</p>
+
     <form method="POST">
         {{ form.hidden_tag() }}
         {{ form.name.label }}{{ form.name() }}
@@ -11,6 +12,9 @@
         <p></p>
         {{ form.submit() }}
     </form>
+
     <p></p>
     <p>{{ not_id_mess }}</p>
 {% endblock %}
+
+

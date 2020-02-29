@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, url_for, redirect
+from flask import Flask, render_template, url_for, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from forms import AddForm, DelForm, AddOwner
@@ -37,8 +37,8 @@ class Puppy(db.Model):
 
     def __repr__(self):
         if self.owner:
-            return f'Puppy name is {self.name} and owner is {self.owner.name}'
-        return f'Puppy name is {self.name} and has no owner assigned yet'
+            return f'Puppy name is {self.name} , id is {self.id} and owner is {self.owner.name}'
+        return f'Puppy name is {self.name} id is {self.id} and has no owner assigned yet'
 
 class Owner(db.Model):
 
@@ -117,6 +117,7 @@ def add_owner():
         cur_pup = Puppy.query.get(puppy_id)
 
         if cur_pup:
+            flash('You successfully added the owner to the puppy!')
 
             cur_owner = Owner(name, puppy_id)
             cur_pup.owner = cur_owner
@@ -124,9 +125,7 @@ def add_owner():
             db.session.add_all([cur_owner, cur_pup])
             db.session.commit()
 
-            puppies = Puppy.query.all()
-
-            return render_template('list.html', puppies=puppies)
+            return redirect(url_for('list_pup'))
 
         else:
             not_id_mess = f'Sorry, but we do not have the puppy with id: {puppy_id} '
