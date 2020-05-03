@@ -5,18 +5,53 @@
     <title>Title</title>
 </head>
 <body>
-    <p>
-        {% if breed %}
-            The breed you entered is {{ breed }}
-            Update it in the form below:
-        {% else %}
-            Please enter your breed:
-        {% endif %}
-    </p>
-    <form method="POST">
-        {{ form.hidden_tag() }}  {# this attribute inherited from FlaskForm object #}
-        {{ form.breed_field.label }} {{ form.breed_field }}
-        {{ form.submit }}
-    </form>
+{% if breed %}
+    <p>The breed your entered is {{ breed }}.</p>
+    <p>Update it in the form below:</p>
+{% else %}
+    <p>Please enter your breed:</p>
+{% endif %}
+<form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.breed_field.label }}{{ form.breed_field }}
+    {{ form.submit }}
+</form>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Title</title>#}
+{#</head>#}
+{#<body>#}
+{#    <p>#}
+{#        {% if breed %}#}
+{#            The breed you entered is {{ breed }}.#}
+{#            <p></p>#}
+{#            Update it in the form below:#}
+{#        {% else %}#}
+{#            Please enter your breed:#}
+{#        {% endif %}#}
+{#    </p>#}
+{#    <form method="POST">#}
+{#        {{ form.hidden_tag() }}  {# this attribute inherited from FlaskForm object #}
+{#        {{ form.breed.label }} {{ form.breed }}#}
+{#        {{ form.submit }}#}
+{#    </form>#}
+{#</body>#}
+{#</html>#}
+-->

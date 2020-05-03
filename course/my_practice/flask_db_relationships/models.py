@@ -72,5 +72,6 @@ class Owner(db.Model):
     def __repr__(self):
         return f'Owner {self.name}'
 
+
 if __name__ == '__main__':
     app.run(debug=True)

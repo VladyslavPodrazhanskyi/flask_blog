@@ -12,21 +12,15 @@
 <div class="jumbotron">
     <h1>Puppy Adoption Form!</h1>
     <h3>Do you already own a dog?</h3>
+
     <form method="GET">
-        <label for="yes">Yes:</label>
-        <input type="radio" id="yes" name="own" value="yes">
-        <label for="no">No:</label>
-        <input type="radio" id="no" name="own" value="no">
+        {{ form.hidden_tag() }}  {# this method inherited from FlaskForm object #}
+        {{ form.own }}
         <p>How clean is your house (Rated 1-3 with 3 being cleanest)?</p>
-        <select name="clean">
-            <option value="Great">3</option>
-            <option value="Ok">2</option>
-            <option value="Bad">1</option>
-        </select>
+        {{ form.clean }}
         <p>Any other comments?</p>
-        <textarea name="comments" rows="8" cols="80"></textarea>
-        <p></p>
-        <input type="submit" value="Submit Feedback">
+        {{ form.comments }}
+        {{ form.submit }}
     </form>
 </div>
 </body>

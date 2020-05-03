@@ -2,9 +2,43 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Puppy_adoption</title>
 </head>
 <body>
-$END$
+    <h1>Puppy Adoption Page</h1>
+    <h2>Please enter your information to adopt a puppy and we'll email you back.</h2>
+    <p>Please Note: First Name, Last Name, Password, and Email are required.</p>
+    <form method="GET">
+        <label for="fn">First Name:</label>
+        <input type="text", id="fn", placeholder="First name">
+
+        <label for="ln">Last Name:</label>
+        <input type="text", id="ln", placeholder="Last Name">
+
+        <label for="email">Email:</label>
+        <input type="email", id="email", placeholder="name@email.com">
+
+        <label for="password">Password</label>
+        <input type="password" id="password">
+
+        <p>Are you over the age of 18?</p>
+        <label for="yes">Yes:</label>
+        <input type="radio" id="yes" name="Over18" value="YesOver" m>
+
+        <label for="no">No:</label>
+        <input type="radio" id="no" name="Over18" value="NotOver">
+
+        <p>Do you have a Credit Card or PayPal?</p>
+
+        <select name="payment">
+            <option value="cc">Credit Card</option>
+            <option value="pp">Pay Pal</option>
+        </select>
+        <p></p>
+
+        <input type="submit" value="Submit">
+
+    </form>
+
 </body>
 </html>

@@ -24,7 +24,7 @@ rufus.report_toys()
 
 # Create an owner object
 
-print (f'Rufus id is {rufus.id}')
+print(f'Rufus id is {rufus.id}')
 jose = Owner('Jose', rufus.id)
 
 # Some toys for Rufus
