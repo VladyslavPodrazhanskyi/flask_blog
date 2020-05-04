@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Add Cat{% endblock %}
+{% block content %}
+    <h1>Have a cat that needs to be adopted?</h1>
+    <p>Add a new cat to our database</p>
+    <form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.label }}
+    {{ form.cat_name }}
+    {{ form.submit }}
+    </form>
+{% endblock %}
