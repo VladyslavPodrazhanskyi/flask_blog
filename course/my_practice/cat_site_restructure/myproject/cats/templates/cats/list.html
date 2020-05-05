@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}List{% endblock %}
+{% block content %}
+    <h1>Here is a list of all available cats:</h1>
+    <ul>
+    {% for cat in cats %}
+    <li><p>{{ cat }}</p></li>
+    {% endfor %}
+    </ul>
+{% endblock %}

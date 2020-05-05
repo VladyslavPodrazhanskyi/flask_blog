@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+    <h1>Did a cat get adopted?</h1>
+    <p>If so: Please fill out its id to remove fro the database</p>
+    <form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.cat_id.label }}
+    {{ form.cat_id }}
+    {{ form.submit }}
+    </form>
+{% endblock %}
