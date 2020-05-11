@@ -4,7 +4,7 @@ from flask import Blueprint, redirect, render_template, url_for
 from myproject import db
 from myproject.cats.forms import AddForm, DelForm
 from myproject.models import Cat
-
+from flask_login import login_required
 
 cats_blueprint = Blueprint('cats', __name__, template_folder='templates/cats')
 
@@ -15,7 +15,9 @@ def cat_list():
     return render_template('list.html', cats=cats)
 
 
+
 @cats_blueprint.route('/add', methods=['GET', 'POST'])
+@login_required
 def add_cat():
     form = AddForm()
     if form.validate_on_submit():
@@ -27,7 +29,9 @@ def add_cat():
     return(render_template('add.html', form=form))
 
 
+
 @cats_blueprint.route('/delete', methods=['POST', 'GET'])
+@login_required
 def del_cat():
     form = DelForm()
     if form.validate_on_submit():

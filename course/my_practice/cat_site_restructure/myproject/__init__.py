@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_login import LoginManager
 
 app = Flask(__name__)
 
@@ -17,11 +18,21 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db: SQLAlchemy = SQLAlchemy(app)
 Migrate(app, db)
 
+login_manager = LoginManager()
+login_manager.init_app(app)
+# Указывается функция на которую будет идти переадресация
+# если для входа на страницу нужно быть залогиненным
+# декоратор @login_required.
+login_manager.login_view = 'user.login'
+
+
 
 from myproject.cats.views import cats_blueprint
 from myproject.owners.views import owners_blueprint
+from myproject.user.views import user_blueprint
 
 app.register_blueprint(owners_blueprint, url_prefix='/owners')
 app.register_blueprint(cats_blueprint, url_prefix='/cats')
+app.register_blueprint(user_blueprint, url_prefix='/user')
 
 
