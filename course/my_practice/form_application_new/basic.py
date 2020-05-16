@@ -21,7 +21,7 @@ def thank_you():
 
 @app.errorhandler(404)
 def error_404(e):
-    return render_template('404.html'), 404
+    return render_template('../Blog_site/blog_project/error_pages/404.html'), 404
 
 
 if __name__ == "__main__":
