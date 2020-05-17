@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="jumbotron">
+    <h1>{{ post.title }}</h1>
+    <h2>Written by: {{ post.author.username }}</h2>
+    {# https://www.programiz.com/python-programming/datetime/strftime #}
+    <h3>Published: {{ post.date.strftime('%B-%d-%Y') }}</h3>
+    <p>{{ post.text }}</p>
+</div>
+{# add buttons to update and delete the post #}
+<div>
+{% if post.author ==  current_user %}
+    <a href="{{ url_for('blog_posts.update', blog_post_id = post.id) }}">Update</a>
+    {# создаем кнопку для удаления поста и подключаем к ней модуль
+     для подтверждения действительно ли пользователь хочет удалить свой пост.#}
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#del_modal">Delete</button>
+{% endif %}
+</div>
+{# Модуль  -  код взять с сайта  bootstrap #}
+<div class="modal" tabindex="-1" role="dialog" id="del_modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete post?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete the post?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        {#<button type="button" class="btn btn-primary">Delete</button>  #}
+          <form action="{{ url_for('blog_posts.delete_post', blog_post_id=post.id) }}" method="POST">
+              <input class="btn btn-danger" type="submit" value="Delete">
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+

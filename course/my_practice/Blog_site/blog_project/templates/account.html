@@ -3,22 +3,31 @@
     <div class="jumbotron">
     <div align="center">
         <h1>Welcome to the page of {{ current_user.username }}!</h1>
-        <img align="center" src="{{ url_for('static', filename='profile_pics/' + current_user.profile_image) }}">
-        <form method="POST">
+        <img align="center" src="{{ url_for('static', filename = 'profile_pics/' + current_user.profile_image) }}">
+        <p>{{ current_user.email }}</p>
+    </div>
+    </div>
+    <div class="container">
+        <form method="POST" action="" enctype="multipart/form-data">
+{# Атрибут enctype  - Определяет способ кодирования данных формы при их отправке на сервер. Обычно
+устанавливать значение атрибута enctype не требуется, данные вполне правильно понимаются на стороне сервера.
+Однако если используется поле для отправки файла следует определить атрибут enctype как multipart/form-data. #}
             {{ form.hidden_tag() }}
             <div class="form-group">
-                {{ form.email.label(class='form-group') }}{{ form.email(class='form-control') }}
+                {{ form.email.label(class='form-group') }}
+                {{ form.email(class='form-control') }}
             </div>
             <div class="form-group">
-                {{ form.username.label(class='form-group') }}{{ form.username(class='form-control') }}
+                {{ form.username.label(class='form-group') }}
+                {{ form.username(class='form-control') }}
             </div>
             <div class="form-group">
-                {{ form.picture.label(class='form-group') }}{{ form.picture(class='form-control') }}
+                {{ form.picture.label(class='form-group') }}
+                {{ form.picture(class='form-control') }}
             </div>
             <div class="form-group">
                 {{ form.submit(class='btn btn-primary') }}
             </div>
         </form>
-    </div>
     </div>
 {% endblock %}

@@ -56,7 +56,7 @@ def register():
 
 
 # account (Update UserForm)
-@users.route('account', methods=['GET', 'POST'])
+@users.route('/account', methods=['GET', 'POST'])
 @login_required
 def account():
     form = UpdateUserForm()
@@ -69,11 +69,12 @@ def account():
         current_user.username = form.username.data
         db.session.commit()
         flash('User account is updated!')
-        return redirect(url_for('core.index'))
+        return redirect(url_for('users.account'))
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
-        profile_image = url_for('static', file_name='profile_pic' + current_user.profile_image)
+
+    profile_image = url_for('static', filename='profile_pics/' + current_user.profile_image)
     return render_template('account.html', profile_image=profile_image, form=form)
 
 
